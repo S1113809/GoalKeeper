@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Goalkeeper</string>
     <string name="subtitle">Om al uw doelen te behalen!</string>
+    <string name="login">Log hier in!</string>
+
+    <string name="Email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="create_acc_button">Maak account</string>
 </resources>
