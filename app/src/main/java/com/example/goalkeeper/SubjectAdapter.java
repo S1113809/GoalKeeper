@@ -1,6 +1,5 @@
 package com.example.goalkeeper;
 
-import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 
         public SubjectViewHolder(View v, OnNoteListener onNoteListener){
             super(v);
-            textView = v.findViewById(R.id.subjectTitle);
+            textView = v.findViewById(R.id.Title);
             this.onNoteListener = onNoteListener;
             v.setOnClickListener(this);
         }

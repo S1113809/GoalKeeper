@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements SubjectAdapter.On
     public void OnNoteClick(int position) {
         Subject subject = subjects.get(position);
         String nameStr = subject.getName();
-        Log.d("test", nameStr);
         Bundle bundle = new Bundle();
         bundle.putString("subjectName", nameStr);
         Intent toNextScreenIntent = new Intent(this, GoalsInSubject.class);
