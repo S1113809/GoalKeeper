@@ -6,21 +6,42 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements SubjectAdapter.OnNoteListener{
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter recyclerViewAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    List<Subject> subjects = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.hasFixedSize();
+
+        subjects.add(new Subject("sport"));
+        subjects.add(new Subject("Gezondheid"));
+        subjects.add(new Subject("Irene Irriteren"));
+        subjects.add(new Subject("School"));
+        subjects.add(new Subject("Huishouden"));
+        subjects.add(new Subject("Hobbies"));
+
+        recyclerViewAdapter = new SubjectAdapter(subjects, this);
+        recyclerView.setAdapter(recyclerViewAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -30,5 +51,14 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public void OnNoteClick(int position) {
+        Subject name = subjects.get(position);
+        String namestr = name.getName();
+        Log.d("test", namestr);
+
+
     }
 }
