@@ -1,5 +1,6 @@
 package com.example.goalkeeper;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements SubjectAdapter.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView2);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.hasFixedSize();
@@ -55,10 +56,13 @@ public class MainActivity extends AppCompatActivity implements SubjectAdapter.On
 
     @Override
     public void OnNoteClick(int position) {
-        Subject name = subjects.get(position);
-        String namestr = name.getName();
-        Log.d("test", namestr);
-
-
+        Subject subject = subjects.get(position);
+        String nameStr = subject.getName();
+        Log.d("test", nameStr);
+        Bundle bundle = new Bundle();
+        bundle.putString("subjectName", nameStr);
+        Intent toNextScreenIntent = new Intent(this, GoalsInSubject.class);
+        toNextScreenIntent.putExtras(bundle);
+        startActivity(toNextScreenIntent);
     }
 }
