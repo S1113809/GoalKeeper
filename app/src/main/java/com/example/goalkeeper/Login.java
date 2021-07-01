@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -55,8 +56,24 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 Log.d("gelukt", "response ontvangen!");
                                 Log.d("response: ", response.toString());
                                 try {
-                                    String token = response.get("token").toString();
-                                    Log.d("token", token);
+                                    String status_code = response.get("status_code").toString();
+                                    switch (status_code){
+                                        case "400":{
+                                            Toast toast = Toast.makeText(getApplicationContext(), "Vul alle velden in", Toast.LENGTH_SHORT);
+                                            toast.show();
+                                            break;
+                                        }
+
+                                        case "500":{
+                                            Toast toast = Toast.makeText(getApplicationContext(), "E-mail/wachtwoord onjuist", Toast.LENGTH_SHORT);
+                                            toast.show();
+                                            break;
+                                        }
+                                        case "200":{
+                                            Log.d("test", "ingelogd");
+                                            break;
+                                        }
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -75,6 +92,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 startActivity(toCreateAccScreen);
                 break;
             }
+        }
+    }
+    public void checkIfEmpty(TextView tv){
+        if(tv.getText().toString().equals("")){
+            tv.setBackgroundColor(getResources().getColor(R.color.GK_red));
         }
     }
 }
