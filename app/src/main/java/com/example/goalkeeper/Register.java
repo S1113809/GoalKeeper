@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,32 +21,33 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class Login extends AppCompatActivity implements View.OnClickListener{
+public class Register extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
-        Button loginButton = findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(this);
+        Button registerBtn = findViewById(R.id.register_button);
+        registerBtn.setOnClickListener(this);
 
-        Button registerButton = findViewById(R.id.create_Acc_Button);
-        registerButton.setOnClickListener(this);
+        Button backBtn = findViewById(R.id.register_cancel);
+        backBtn.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.loginButton:{
-                TextView email = findViewById(R.id.register_email);
-                TextView password = findViewById(R.id.register_password);
-                String URL = "http://192.168.178.208:80/api/login";
+            case R.id.register_button:{
+                TextView regName = findViewById(R.id.register_name);
+                TextView regEmail = findViewById(R.id.register_email);
+                TextView regPass = findViewById(R.id.register_password);
+                String URL = "http://192.168.178.208:80/api/register";
 
                 HashMap data = new HashMap();
-                data.put("email", email.getText().toString());
-                data.put("password", password.getText().toString());
+                data.put("name", regName.getText().toString());
+                data.put("email", regEmail.getText().toString());
+                data.put("password", regPass.getText().toString());
 
                 RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
                 JsonObjectRequest jsonObj = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(data),
@@ -55,8 +57,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 Log.d("gelukt", "response ontvangen!");
                                 Log.d("response: ", response.toString());
                                 try {
-                                    String token = response.get("token").toString();
-                                    Log.d("token", token);
+                                    String message = response.get("message").toString();
+                                    Log.d("message", message);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -68,11 +70,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     }
                 });
                 VolleySingleton.getInstance(this).addToRequestQueue(jsonObj);
+                Intent toPrevScreenIntent = new Intent(this, Login.class);
+                startActivity(toPrevScreenIntent);
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Account aangemaakt", Toast.LENGTH_SHORT);
+                toast.show();
                 break;
             }
-            case R.id.create_Acc_Button:{
-                Intent toCreateAccScreen = new Intent(this, Register.class);
-                startActivity(toCreateAccScreen);
+
+            case R.id.register_cancel:{
+                Intent toPrevScreenIntent = new Intent(this, Login.class);
+                startActivity(toPrevScreenIntent);
                 break;
             }
         }
