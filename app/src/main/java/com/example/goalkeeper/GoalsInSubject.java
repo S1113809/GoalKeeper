@@ -22,8 +22,10 @@ public class GoalsInSubject extends AppCompatActivity {
         setContentView(R.layout.activity_goals_in_subject);
 
         TextView header = findViewById(R.id.header);
+        TextView description = findViewById(R.id.descriptionView);
         Bundle bundle = getIntent().getExtras();
         header.setText(bundle.getString("subjectName"));
+        description.setText(bundle.getString("subjectDesc"));
 
         recyclerView = findViewById(R.id.recyclerView2);
         layoutManager = new LinearLayoutManager(this);

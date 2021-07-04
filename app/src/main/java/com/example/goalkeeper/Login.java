@@ -1,8 +1,10 @@
 package com.example.goalkeeper;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,9 +22,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Set;
+import java.util.function.Function;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
-
+    public static final String SHARED_PREFS = "sharedPrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.loginButton:{
-                TextView email = findViewById(R.id.register_email);
+                TextView email = findViewById(R.id.createSubjectDesc);
                 TextView password = findViewById(R.id.register_password);
                 String URL = "http://192.168.178.208:80/api/login";
 
@@ -53,8 +57,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Log.d("gelukt", "response ontvangen!");
-                                Log.d("response: ", response.toString());
+                                Log.d("Login response: ", response.toString());
                                 try {
                                     String status_code = response.get("status_code").toString();
                                     switch (status_code){
@@ -71,6 +74,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         }
                                         case "200":{
                                             Log.d("test", "ingelogd");
+                                            saveToken(response.get("token").toString());
+                                            Intent loginIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                            startActivity(loginIntent);
                                             break;
                                         }
                                     }
@@ -94,9 +100,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             }
         }
     }
-    public void checkIfEmpty(TextView tv){
-        if(tv.getText().toString().equals("")){
-            tv.setBackgroundColor(getResources().getColor(R.color.GK_red));
-        }
+
+    public void saveToken(String token){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("token", token);
+        editor.apply();
+        Log.d("SHAREDPREFS", "saveToken: Opgeslagen");
+        Log.d("SHAREDPREFS", sharedPreferences.getString("token", ""));
     }
 }

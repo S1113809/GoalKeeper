@@ -14,11 +14,13 @@
         <EditText
             android:id="@+id/createSubjectDesc"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="154dp"
             android:layout_marginTop="75dp"
             android:ems="10"
             android:fontFamily="@font/poppins_regular"
-            android:inputType="textEmailAddress"
+            android:hint="Max. 200 tekens"
+            android:inputType="textMultiLine"
+            android:maxLength="200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/createSubjectName" />
@@ -28,34 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/Email"
+            android:text="@string/description"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/createSubjectDesc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.141"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/register_password"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="75dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins_regular"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createSubjectDesc" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/password"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/register_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.166"
             app:layout_constraintStart_toStartOf="parent" />
@@ -77,25 +54,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/name"
+            android:text="@string/subject_name"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/createSubjectName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.139"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/finishSubjectBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/button_register"
+            android:text="@string/finish_subject"
             app:backgroundTint="@color/GK_purple"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.174"
+            app:layout_constraintHorizontal_bias="0.219"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_password" />
+            app:layout_constraintTop_toBottomOf="@+id/createSubjectDesc" />
 
         <Button
             android:id="@+id/createSubjectBackBtn"
@@ -156,7 +133,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="92dp"
                 android:fontFamily="@font/poppins_light"
-                android:text="@string/register"
+                android:text="@string/create_subject"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

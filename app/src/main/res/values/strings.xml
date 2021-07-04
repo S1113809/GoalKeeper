@@ -11,4 +11,8 @@
     <string name="button_back">Ga terug</string>
     <string name="login_button">Login</string>
     <string name="create_acc_button">Maak account</string>
+    <string name="create_subject">Maak onderwerp!</string>
+    <string name="subject_name">Onderwerp Naam</string>
+    <string name="description">Beschrijving</string>
+    <string name="finish_subject">Maak onderwerp</string>
 </resources>

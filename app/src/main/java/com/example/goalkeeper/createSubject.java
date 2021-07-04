@@ -3,6 +3,7 @@ package com.example.goalkeeper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,48 +11,50 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Map;
 
-public class Register extends AppCompatActivity implements View.OnClickListener{
+public class createSubject extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_create_subject);
 
-        Button registerBtn = findViewById(R.id.finishSubjectBtn);
-        registerBtn.setOnClickListener(this);
+        Button finishSubject = findViewById(R.id.finishSubjectBtn);
+        finishSubject.setOnClickListener(this);
 
-        Button backBtn = findViewById(R.id.createSubjectBackBtn);
-        backBtn.setOnClickListener(this);
+        Button backButton = findViewById(R.id.createSubjectBackBtn);
+        backButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.finishSubjectBtn:{
-                TextView regName = findViewById(R.id.createSubjectName);
-                checkIfEmpty(regName);
-                TextView regEmail = findViewById(R.id.createSubjectDesc);
-                checkIfEmpty(regEmail);
-                TextView regPass = findViewById(R.id.register_password);
-                checkIfEmpty(regPass);
-                String URL = "http://192.168.178.208:80/api/register";
+                TextView subjectName = findViewById(R.id.createSubjectName);
+                checkIfEmpty(subjectName);
+                TextView subjectDescription = findViewById(R.id.createSubjectDesc);
+                checkIfEmpty(subjectDescription);
+                String URL = "http://192.168.178.208:80/api/create/subject";
 
-                if(!regName.getText().toString().equals("") || !regEmail.getText().toString().equals("") || !regPass.getText().toString().equals("")){
+                if(!subjectName.getText().toString().equals("") || !subjectDescription.getText().toString().equals("")){
                     HashMap data = new HashMap();
-                    data.put("name", regName.getText().toString());
-                    data.put("email", regEmail.getText().toString());
-                    data.put("password", regPass.getText().toString());
+                    data.put("name", subjectName.getText().toString());
+                    data.put("description", subjectDescription.getText().toString());
 
                     RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
                     JsonObjectRequest jsonObj = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(data),
@@ -65,26 +68,37 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                                         Log.d("message", message);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
+                                        Log.d("error", "onResponse: ");
                                     }
                                 }
-                            }, new Response.ErrorListener() {
+                            }, new Response.ErrorListener()
+                    {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.d("gefaald", error.getMessage());
+
                         }
-                    });
+                    }){
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String>  params = new HashMap<String, String>();
+                            params.put("Authorization", getToken());
+                            return params;
+                        }
+                    };
+
                     VolleySingleton.getInstance(this).addToRequestQueue(jsonObj);
-                    Intent toPrevScreenIntent = new Intent(this, Login.class);
+                    Intent toPrevScreenIntent = new Intent(this, MainActivity.class);
                     startActivity(toPrevScreenIntent);
-                    Toast toast = Toast.makeText(this.getApplicationContext(), "Account aangemaakt", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(this.getApplicationContext(), "Subject aangemaakt", Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 break;
             }
 
             case R.id.createSubjectBackBtn:{
-                Intent toPrevScreenIntent = new Intent(this, Login.class);
-                startActivity(toPrevScreenIntent);
+                Intent back = new Intent(this, MainActivity.class);
+                startActivity(back);
                 break;
             }
         }
@@ -94,5 +108,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         if(tv.getText().toString().equals("")){
             tv.setBackgroundColor(getResources().getColor(R.color.GK_red));
         }
+    }
+
+    public String getToken(){
+        final String SHARED_PREFS = "sharedPrefs";
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
+        Log.d("SHAREDPREFS", "saveToken: Token Opgehaald");
+        Log.d("SHAREDPREFS", sharedPreferences.getString("token", ""));
+        String fullToken = "Bearer " + sharedPreferences.getString("token", "");
+        return fullToken;
     }
 }
