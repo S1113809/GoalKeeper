@@ -1,6 +1,5 @@
 package com.example.goalkeeper;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,8 +21,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Set;
-import java.util.function.Function;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -44,7 +41,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.loginButton:{
-                TextView email = findViewById(R.id.createSubjectDesc);
+                TextView email = findViewById(R.id.createGoalDesc);
                 TextView password = findViewById(R.id.register_password);
                 String URL = "http://192.168.178.208:80/api/login";
 

@@ -28,20 +28,20 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Button registerBtn = findViewById(R.id.finishSubjectBtn);
+        Button registerBtn = findViewById(R.id.finishGoalBtn);
         registerBtn.setOnClickListener(this);
 
-        Button backBtn = findViewById(R.id.createSubjectBackBtn);
+        Button backBtn = findViewById(R.id.createGoalBackBtn);
         backBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.finishSubjectBtn:{
-                TextView regName = findViewById(R.id.createSubjectName);
+            case R.id.finishGoalBtn:{
+                TextView regName = findViewById(R.id.createGoalName);
                 checkIfEmpty(regName);
-                TextView regEmail = findViewById(R.id.createSubjectDesc);
+                TextView regEmail = findViewById(R.id.createGoalDesc);
                 checkIfEmpty(regEmail);
                 TextView regPass = findViewById(R.id.register_password);
                 checkIfEmpty(regPass);
@@ -82,7 +82,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                 break;
             }
 
-            case R.id.createSubjectBackBtn:{
+            case R.id.createGoalBackBtn:{
                 Intent toPrevScreenIntent = new Intent(this, Login.class);
                 startActivity(toPrevScreenIntent);
                 break;

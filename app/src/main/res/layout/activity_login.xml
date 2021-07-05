@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/createSubjectDesc"
+            android:id="@+id/createGoalDesc"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:ems="10"
@@ -31,7 +31,7 @@
             android:fontFamily="@font/poppins_medium"
             android:text="@string/Email"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/createSubjectDesc"
+            app:layout_constraintBottom_toTopOf="@+id/createGoalDesc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.154"
             app:layout_constraintStart_toStartOf="parent" />
@@ -47,7 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createSubjectDesc" />
+            app:layout_constraintTop_toBottomOf="@+id/createGoalDesc" />
 
         <TextView
             android:id="@+id/textView3"

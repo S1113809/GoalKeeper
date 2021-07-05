@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/createSubjectDesc"
+            android:id="@+id/createGoalDesc"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="75dp"
@@ -21,7 +21,7 @@
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createSubjectName" />
+            app:layout_constraintTop_toBottomOf="@+id/createGoalName" />
 
         <TextView
             android:id="@+id/textView2"
@@ -30,7 +30,7 @@
             android:fontFamily="@font/poppins_medium"
             android:text="@string/Email"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/createSubjectDesc"
+            app:layout_constraintBottom_toTopOf="@+id/createGoalDesc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.141"
             app:layout_constraintStart_toStartOf="parent" />
@@ -46,7 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createSubjectDesc" />
+            app:layout_constraintTop_toBottomOf="@+id/createGoalDesc" />
 
         <TextView
             android:id="@+id/textView3"
@@ -61,7 +61,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/createSubjectName"
+            android:id="@+id/createGoalName"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="220dp"
@@ -79,13 +79,13 @@
             android:fontFamily="@font/poppins_medium"
             android:text="@string/name"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/createSubjectName"
+            app:layout_constraintBottom_toTopOf="@+id/createGoalName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.139"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/finishSubjectBtn"
+            android:id="@+id/finishGoalBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -98,7 +98,7 @@
             app:layout_constraintTop_toBottomOf="@+id/register_password" />
 
         <Button
-            android:id="@+id/createSubjectBackBtn"
+            android:id="@+id/createGoalBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -108,7 +108,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.162"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/finishSubjectBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/finishGoalBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

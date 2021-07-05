@@ -15,4 +15,9 @@
     <string name="subject_name">Onderwerp Naam</string>
     <string name="description">Beschrijving</string>
     <string name="finish_subject">Maak onderwerp</string>
+
+    <string name="create_goal">Maak een doel!</string>
+    <string name="goal_name">Doel naam</string>
+    <string name="goal_endDate">Einddatum</string>
+    <string name="goal_step">Hoevaak wil je dit voltooien?</string>
 </resources>

@@ -17,13 +17,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,20 +31,20 @@ public class createSubject extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_subject);
 
-        Button finishSubject = findViewById(R.id.finishSubjectBtn);
+        Button finishSubject = findViewById(R.id.finishGoalBtn);
         finishSubject.setOnClickListener(this);
 
-        Button backButton = findViewById(R.id.createSubjectBackBtn);
+        Button backButton = findViewById(R.id.createGoalBackBtn);
         backButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.finishSubjectBtn:{
-                TextView subjectName = findViewById(R.id.createSubjectName);
+            case R.id.finishGoalBtn:{
+                TextView subjectName = findViewById(R.id.createGoalName);
                 checkIfEmpty(subjectName);
-                TextView subjectDescription = findViewById(R.id.createSubjectDesc);
+                TextView subjectDescription = findViewById(R.id.createGoalDesc);
                 checkIfEmpty(subjectDescription);
                 String URL = "http://192.168.178.208:80/api/create/subject";
 
@@ -96,7 +93,7 @@ public class createSubject extends AppCompatActivity implements View.OnClickList
                 break;
             }
 
-            case R.id.createSubjectBackBtn:{
+            case R.id.createGoalBackBtn:{
                 Intent back = new Intent(this, MainActivity.class);
                 startActivity(back);
                 break;

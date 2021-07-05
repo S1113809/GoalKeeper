@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,5 +41,22 @@ public class GoalsInSubject extends AppCompatActivity {
 
         recyclerViewAdapter = new GoalAdapter(goals);
         recyclerView.setAdapter(recyclerViewAdapter);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String currentSubjectName = bundle.getString("subjectName");
+                String currentSubjectDesc = bundle.getString("subjectDesc");
+                int currentSubjectID = bundle.getInt("subjectId", 0);
+                Bundle createBundle = new Bundle();
+                createBundle.putString("subjectName", currentSubjectName);
+                createBundle.putString("subjectDesc", currentSubjectDesc);
+                createBundle.putInt("subjectId", currentSubjectID);
+                Intent createGoalIntent = new Intent(getApplicationContext(), createGoal.class);
+                createGoalIntent.putExtras(createBundle);
+                startActivity(createGoalIntent);
+            }
+        });
     }
 }
